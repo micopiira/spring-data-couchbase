@@ -116,7 +116,7 @@ public class CouchbaseExceptionTranslator implements PersistenceExceptionTransla
 			return new TransientDataAccessResourceException(ex.getMessage(), ex);
 		}
 
-		if ((ex instanceof RuntimeException && ex.getCause() instanceof TimeoutException)) {
+		if (ex.getCause() instanceof TimeoutException) {
 			return new QueryTimeoutException(ex.getMessage(), ex);
 		}
 
@@ -130,7 +130,7 @@ public class CouchbaseExceptionTranslator implements PersistenceExceptionTransla
 			// Replace the TransactionOperationFailedException, since we want the Spring operation to fail with a
 			// Spring error. Internal state has already been set in the AttemptContext so the retry, rollback etc.
 			// will get respected regardless of what gets propagated (or not) from the lambda.
-			return new UncategorizedTransactionDataAccessException((TransactionOperationFailedException) ex);
+			return new UncategorizedTransactionDataAccessException(transactionOperationFailedException);
 		}
 
 		return null;
