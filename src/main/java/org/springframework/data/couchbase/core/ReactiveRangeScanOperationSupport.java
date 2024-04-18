@@ -31,6 +31,11 @@ import com.couchbase.client.java.kv.ScanOptions;
 import com.couchbase.client.java.kv.ScanTerm;
 import com.couchbase.client.java.kv.ScanType;
 
+/**
+ * {@link ReactiveRangeScanOperation} implementation for Couchbase.
+ *
+ * @author Mico Piira
+ */
 public class ReactiveRangeScanOperationSupport implements ReactiveRangeScanOperation {
 
 	private final ReactiveCouchbaseTemplate template;

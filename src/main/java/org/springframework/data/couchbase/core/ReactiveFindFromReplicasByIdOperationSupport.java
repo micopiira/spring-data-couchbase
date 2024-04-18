@@ -35,6 +35,7 @@ import com.couchbase.client.java.kv.GetAnyReplicaOptions;
  * {@link ReactiveFindFromReplicasByIdOperation} implementations for Couchbase.
  *
  * @author Michael Reiche
+ * @author Mico Piira
  */
 public class ReactiveFindFromReplicasByIdOperationSupport implements ReactiveFindFromReplicasByIdOperation {
 

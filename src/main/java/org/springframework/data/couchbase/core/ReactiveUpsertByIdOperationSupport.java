@@ -38,6 +38,7 @@ import com.couchbase.client.java.kv.UpsertOptions;
  *
  * @author Michael Reiche
  * @author Tigran Babloyan
+ * @author Mico Piira
  */
 public class ReactiveUpsertByIdOperationSupport implements ReactiveUpsertByIdOperation {
 

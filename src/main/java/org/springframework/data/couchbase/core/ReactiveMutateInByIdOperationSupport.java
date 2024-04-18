@@ -37,6 +37,7 @@ import java.util.*;
  * {@link ReactiveMutateInByIdOperation} implementations for Couchbase.
  *
  * @author Tigran Babloyan
+ * @author Mico Piira
  */
 public class ReactiveMutateInByIdOperationSupport implements ReactiveMutateInByIdOperation {
 

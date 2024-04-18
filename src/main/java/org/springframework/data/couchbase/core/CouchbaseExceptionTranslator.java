@@ -65,6 +65,7 @@ import com.couchbase.client.core.error.transaction.TransactionOperationFailedExc
  * @author Michael Reiche
  * @author Graham Pople
  * @author Tigran Babloyan
+ * @author Mico Piira
  */
 public class CouchbaseExceptionTranslator implements PersistenceExceptionTranslator {
 

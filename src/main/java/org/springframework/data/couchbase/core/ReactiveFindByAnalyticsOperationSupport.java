@@ -29,6 +29,11 @@ import com.couchbase.client.java.analytics.AnalyticsOptions;
 import com.couchbase.client.java.analytics.AnalyticsScanConsistency;
 import com.couchbase.client.java.analytics.ReactiveAnalyticsResult;
 
+/**
+ * {@link ReactiveFindByAnalyticsOperation} implementation for Couchbase.
+ *
+ * @author Mico Piira
+ */
 public class ReactiveFindByAnalyticsOperationSupport implements ReactiveFindByAnalyticsOperation {
 
 	private static final AnalyticsQuery ALL_QUERY = new AnalyticsQuery();

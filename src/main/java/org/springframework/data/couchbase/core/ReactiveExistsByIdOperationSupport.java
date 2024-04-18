@@ -36,6 +36,7 @@ import com.couchbase.client.java.kv.ExistsResult;
  * ReactiveExistsById Support
  *
  * @author Michael Reiche
+ * @author Mico Piira
  */
 public class ReactiveExistsByIdOperationSupport implements ReactiveExistsByIdOperation {
 

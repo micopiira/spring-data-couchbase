@@ -43,6 +43,7 @@ import com.couchbase.client.java.transactions.TransactionQueryResult;
  *
  * @author Michael Nitschinger
  * @author Michael Reiche
+ * @author Mico Piira
  */
 public class ReactiveFindByQueryOperationSupport implements ReactiveFindByQueryOperation {
 
