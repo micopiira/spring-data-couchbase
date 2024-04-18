@@ -166,13 +166,7 @@ public class ReactiveRangeScanOperationSupport implements ReactiveRangeScanOpera
 									new String(result.contentAsBytes(), StandardCharsets.UTF_8), result.cas(), domainType,
 									pArgs.getScope(), pArgs.getCollection(), null, null)));
 
-			return reactiveEntities.onErrorMap(throwable -> {
-				if (throwable instanceof RuntimeException) {
-					return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-				} else {
-					return throwable;
-				}
-			});
+			return reactiveEntities.onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException);
 
 		}
 
@@ -212,13 +206,7 @@ public class ReactiveRangeScanOperationSupport implements ReactiveRangeScanOpera
 			Flux<String> reactiveEntities = TransactionalSupport.verifyNotInTransaction("rangeScanIds")
 					.thenMany(rc.scan(scanType, buildScanOptions(pArgs.getOptions(), true)).map(result -> result.id()));
 
-			return reactiveEntities.onErrorMap(throwable -> {
-				if (throwable instanceof RuntimeException) {
-					return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-				} else {
-					return throwable;
-				}
-			});
+			return reactiveEntities.onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException);
 
 		}
 

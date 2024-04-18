@@ -123,13 +123,7 @@ public class ReactiveInsertByIdOperationSupport implements ReactiveInsertByIdOpe
 											.flatMap(result -> this.support.applyResult(object, converted, converted.getId(), result.cas(),
 													null, null));
 								}
-							})).onErrorMap(throwable -> {
-								if (throwable instanceof RuntimeException) {
-									return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-								} else {
-									return throwable;
-								}
-							}));
+							})).onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException));
 		}
 
 		private void rejectInvalidTransactionalOptions() {

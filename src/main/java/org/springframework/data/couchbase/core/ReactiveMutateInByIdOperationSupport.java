@@ -115,13 +115,7 @@ public class ReactiveMutateInByIdOperationSupport implements ReactiveMutateInByI
 												result -> support.applyResult(object, converted, converted.getId(), result.cas(), null, null)));
 					});
 
-			return reactiveEntity.onErrorMap(throwable -> {
-				if (throwable instanceof RuntimeException) {
-					return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-				} else {
-					return throwable;
-				}
-			});
+			return reactiveEntity.onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException);
 		}
 
 		@Override

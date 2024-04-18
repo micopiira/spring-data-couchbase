@@ -118,13 +118,9 @@ public class ReactiveFindByAnalyticsOperationSupport implements ReactiveFindByAn
 					LOG.debug("findByAnalytics statement: {}", statement);
 				}
 				return TransactionalSupport.verifyNotInTransaction("findByAnalytics").then(template.getCouchbaseClientFactory()
-						.getCluster().reactive().analyticsQuery(statement, buildAnalyticsOptions())).onErrorMap(throwable -> {
-							if (throwable instanceof RuntimeException) {
-								return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-							} else {
-								return throwable;
-							}
-						}).flatMapMany(ReactiveAnalyticsResult::rowsAsObject).flatMap(row -> {
+						.getCluster().reactive().analyticsQuery(statement, buildAnalyticsOptions()))
+						.onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException)
+						.flatMapMany(ReactiveAnalyticsResult::rowsAsObject).flatMap(row -> {
 							String id = null;
 							Long cas = null;
 							id = row.getString(TemplateUtils.SELECT_ID);

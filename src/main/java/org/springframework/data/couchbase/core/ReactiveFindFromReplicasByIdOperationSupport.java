@@ -88,13 +88,7 @@ public class ReactiveFindFromReplicasByIdOperationSupport implements ReactiveFin
 							.getCollection(pArgs.getCollection()).reactive().getAnyReplica(docId, pArgs.getOptions()))
 					.flatMap(result -> support.decodeEntity(id, result.contentAs(String.class), result.cas(), returnType,
 							pArgs.getScope(), pArgs.getCollection(), null, null))
-					.onErrorMap(throwable -> {
-						if (throwable instanceof RuntimeException) {
-							return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-						} else {
-							return throwable;
-						}
-					});
+					.onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException);
 		}
 
 		@Override

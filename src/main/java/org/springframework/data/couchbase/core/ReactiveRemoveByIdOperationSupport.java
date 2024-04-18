@@ -130,13 +130,7 @@ public class ReactiveRemoveByIdOperationSupport implements ReactiveRemoveByIdOpe
 					});
 
 				}
-			}).onErrorMap(throwable -> {
-				if (throwable instanceof RuntimeException) {
-					return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-				} else {
-					return throwable;
-				}
-			});
+			}).onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException);
 		}
 
 		private void rejectInvalidTransactionalOptions() {

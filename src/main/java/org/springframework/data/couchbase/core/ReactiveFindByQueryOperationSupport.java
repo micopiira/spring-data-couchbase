@@ -199,13 +199,8 @@ public class ReactiveFindByQueryOperationSupport implements ReactiveFindByQueryO
 				}
 			});
 
-			return allResult.onErrorMap(throwable -> {
-				if (throwable instanceof RuntimeException) {
-					return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-				} else {
-					return throwable;
-				}
-			}).flatMapMany(o -> o instanceof ReactiveQueryResult ? ((ReactiveQueryResult) o).rowsAsObject()
+			return allResult.onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException)
+					.flatMapMany(o -> o instanceof ReactiveQueryResult ? ((ReactiveQueryResult) o).rowsAsObject()
 					: Flux.fromIterable(((TransactionQueryResult) o).rowsAsObject())).flatMap(row -> {
 						String id = "";
 						Long cas = Long.valueOf(0);

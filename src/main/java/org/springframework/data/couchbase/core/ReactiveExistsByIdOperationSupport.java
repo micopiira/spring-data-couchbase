@@ -85,13 +85,7 @@ public class ReactiveExistsByIdOperationSupport implements ReactiveExistsByIdOpe
 					.flatMap(docId -> template.getCouchbaseClientFactory().withScope(pArgs.getScope())
 							.getCollection(pArgs.getCollection()).reactive().exists(id, buildOptions(pArgs.getOptions()))
 							.map(ExistsResult::exists))
-					.onErrorMap(throwable -> {
-						if (throwable instanceof RuntimeException) {
-							return template.potentiallyConvertRuntimeException((RuntimeException) throwable);
-						} else {
-							return throwable;
-						}
-					});
+					.onErrorMap(RuntimeException.class, template::potentiallyConvertRuntimeException);
 		}
 
 		private ExistsOptions buildOptions(ExistsOptions options) {
