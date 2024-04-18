@@ -133,8 +133,7 @@ public class CouchbaseExceptionTranslator implements PersistenceExceptionTransla
 			return new UncategorizedTransactionDataAccessException((TransactionOperationFailedException) ex);
 		}
 
-		// Unable to translate exception, therefore just throw the original!
-		throw ex;
+		return null;
 	}
 
 }
